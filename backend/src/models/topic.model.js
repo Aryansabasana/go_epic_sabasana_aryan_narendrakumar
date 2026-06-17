@@ -20,6 +20,10 @@ const topicSchema = new mongoose.Schema(
             required : true,
             trim : true,
         },
+        views: {
+            type: Number,
+            default: 0,
+        },
     },
     {
         timestamps : true,

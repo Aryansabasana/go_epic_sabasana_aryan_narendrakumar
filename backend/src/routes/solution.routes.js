@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Solution = require("../models/solution.model");
-const { getAllSolutions, getSingleSolution, createSolution, replaceSolution, updateSolution, deleteSolution, getSolutionsByTopic, getSolutionsByDifficulty, getSolutionsBySource, searchSolutions, getRecentSolutions } = require("../controllers/solution.controller");
+const { getAllSolutions, getSingleSolution, createSolution, replaceSolution, updateSolution, deleteSolution, getSolutionsByTopic, getSolutionsByDifficulty, getSolutionsBySource, searchSolutions, getRecentSolutions, getRandomSolution, getTrendingSolutions } = require("../controllers/solution.controller");
 
 
 //GET ALL PROBLEMS
@@ -17,10 +17,11 @@ router.get("/difficulty/:difficulty", getSolutionsByDifficulty);
 
 router.get("/source/:source", getSolutionsBySource);
 
-router.get("/:solutionId", getSingleSolution);
+router.get("/random", getRandomSolution);
 
-//GET SINGLE SOLUTION 
-router.get("/:solutionId", getSingleSolution)
+router.get("/trending", getTrendingSolutions);
+
+router.get("/:solutionId", getSingleSolution);
 
 
 // CREATE SOLUTION
