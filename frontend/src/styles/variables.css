@@ -1,0 +1,105 @@
+/* GoEpic Modern Premium Design Tokens */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap');
+
+:root {
+  /* Color Palette (HSL Tailored) */
+  --bg-deep: hsl(233, 30%, 5%);
+  --bg-dark: hsl(233, 24%, 8%);
+  --bg-card: hsla(233, 24%, 12%, 0.5);
+  --bg-card-hover: hsla(233, 24%, 16%, 0.75);
+  --bg-input: hsl(233, 20%, 10%);
+  --bg-input-hover: hsl(233, 20%, 13%);
+  
+  /* Brand Colors & Accent Gradients */
+  --color-primary: hsl(263, 85%, 64%);
+  --color-primary-glow: hsla(263, 85%, 64%, 0.15);
+  --color-secondary: hsl(190, 90%, 50%);
+  --color-secondary-glow: hsla(190, 90%, 50%, 0.15);
+  
+  --grad-brand: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --grad-brand-glow: linear-gradient(135deg, hsla(263, 85%, 64%, 0.2) 0%, hsla(190, 90%, 50%, 0.2) 100%);
+  --grad-dark: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-dark) 100%);
+  --grad-border: linear-gradient(135deg, hsla(263, 85%, 64%, 0.3) 0%, hsla(190, 90%, 50%, 0.1) 100%);
+  
+  /* Status Colors */
+  --color-easy: hsl(145, 80%, 45%);
+  --color-easy-glow: hsla(145, 80%, 45%, 0.1);
+  --color-medium: hsl(38, 95%, 55%);
+  --color-medium-glow: hsla(38, 95%, 55%, 0.1);
+  --color-advanced: hsl(343, 90%, 55%);
+  --color-advanced-glow: hsla(343, 90%, 55%, 0.1);
+  
+  /* Text Colors */
+  --text-primary: hsl(210, 20%, 98%);
+  --text-secondary: hsl(215, 16%, 74%);
+  --text-muted: hsl(215, 12%, 50%);
+  --text-glow: 0 0 10px hsla(210, 20%, 98%, 0.2);
+  
+  /* Borders and Radii */
+  --border-glow: 1px solid hsla(215, 15%, 70%, 0.08);
+  --border-glow-active: 1px solid hsla(263, 85%, 64%, 0.4);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 30px;
+  
+  /* Shadow & Glass Effects */
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --glass-blur: blur(12px);
+  --shadow-glow: 0 0 20px var(--color-primary-glow);
+  
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Fonts */
+  --font-primary: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-title: 'Outfit', var(--font-primary);
+  --font-code: 'Fira Code', monospace;
+}
+
+/* Base Micro-Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px var(--color-primary-glow);
+  }
+  50% {
+    box-shadow: 0 0 25px hsla(263, 85%, 64%, 0.3);
+  }
+}
+
+@keyframes borderRotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp var(--transition-normal) forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
