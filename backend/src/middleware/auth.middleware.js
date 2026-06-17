@@ -33,7 +33,31 @@ const verifyAdmin = (req, res, next) => {
   next();
 };
 
+// Role middleware: only admin role allowed
+const requireAdmin = (req, res, next) => {
+  if (!req.user || req.user.role !== "admin") {
+    return res.status(403).json({
+      success: false,
+      message: "Forbidden: Admin access required",
+    });
+  }
+  next();
+};
+
+// Role middleware: user or admin allowed
+const requireUser = (req, res, next) => {
+  if (!req.user || !["user", "admin"].includes(req.user.role)) {
+    return res.status(403).json({
+      success: false,
+      message: "Forbidden: User access required",
+    });
+  }
+  next();
+};
+
 module.exports = {
   verifyJWT,
   verifyAdmin,
+  requireAdmin,
+  requireUser,
 };

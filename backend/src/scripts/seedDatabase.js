@@ -10,14 +10,12 @@ const Dataset = require("../models/dataset.model");
 
 const MONGO_URI = process.env.MONGO_URI;
 
-// Load dataset
+
 const dataPath = path.join(__dirname, "../../data/go-epic.json");
 const rawData = fs.readFileSync(dataPath, "utf-8");
 const dataset = JSON.parse(rawData);
 
-// ========================
-// NORMALIZER
-// ========================
+
 const normalizeDifficulty = (d) => {
   if (!d) return "medium";
 
@@ -48,7 +46,7 @@ const seedDatabase = async () => {
     await mongoose.connect(MONGO_URI);
     console.log("✅ Connected successfully");
 
-    // Clear old data
+  
     await Problem.deleteMany();
     await Solution.deleteMany();
     await Topic.deleteMany();
@@ -56,9 +54,7 @@ const seedDatabase = async () => {
 
     console.log("🧹 Old data cleared");
 
-    // ========================
-    // 1. PROBLEMS
-    // ========================
+    
     const problems = dataset.map((item, index) => ({
       title: `Problem ${index + 1}`,
       instruction: item.instruction,
@@ -69,9 +65,7 @@ const seedDatabase = async () => {
     await Problem.insertMany(problems);
     console.log(`✅ Inserted ${problems.length} problems`);
 
-    // ========================
-    // 2. SOLUTIONS
-    // ========================
+    
     const solutions = dataset.map((item, index) => ({
       title: `Solution ${index + 1}`,
       topic: item.topic,

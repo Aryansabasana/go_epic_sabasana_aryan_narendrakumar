@@ -33,7 +33,11 @@ const getDatasetStats = asyncHandler(async (req, res) => {
 });
 
 const getTotalSolutions = asyncHandler(async (req, res) => {
-  const totalSolutions = await Solution.countDocuments();
+  const stats = await Solution.aggregate([
+    { $count: "totalSolutions" }
+  ]);
+
+  const totalSolutions = stats.length > 0 ? stats[0].totalSolutions : 0;
 
   res.status(200).json({
     success: true,
@@ -42,10 +46,12 @@ const getTotalSolutions = asyncHandler(async (req, res) => {
 });
 
 const getAdvancedProblemsStats = asyncHandler(async (req, res) => {
-  const totalAdvancedProblems =
-    await Problem.countDocuments({
-      difficulty: "advanced",
-    });
+  const stats = await Problem.aggregate([
+    { $match: { difficulty: "advanced" } },
+    { $count: "totalAdvancedProblems" }
+  ]);
+
+  const totalAdvancedProblems = stats.length > 0 ? stats[0].totalAdvancedProblems : 0;
 
   res.status(200).json({
     success: true,
@@ -54,25 +60,33 @@ const getAdvancedProblemsStats = asyncHandler(async (req, res) => {
 });
 
 const getTopicStatistics = asyncHandler(async (req, res) => {
-  const totalProblems = await Problem.countDocuments({
-    topic: req.params.topic,
-  });
+  const { topic } = req.params;
+  const stats = await Problem.aggregate([
+    { $match: { topic: topic } },
+    { $count: "totalProblems" }
+  ]);
+
+  const totalProblems = stats.length > 0 ? stats[0].totalProblems : 0;
 
   res.status(200).json({
     success: true,
-    topic: req.params.topic,
+    topic,
     totalProblems,
   });
 });
 
 const getSourceStatistics = asyncHandler(async (req, res) => {
-  const totalProblems = await Problem.countDocuments({
-    source: req.params.source,
-  });
+  const { source } = req.params;
+  const stats = await Problem.aggregate([
+    { $match: { source: source } },
+    { $count: "totalProblems" }
+  ]);
+
+  const totalProblems = stats.length > 0 ? stats[0].totalProblems : 0;
 
   res.status(200).json({
     success: true,
-    source: req.params.source,
+    source,
     totalProblems,
   });
 });

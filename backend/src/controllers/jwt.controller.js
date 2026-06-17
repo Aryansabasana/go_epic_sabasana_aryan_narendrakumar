@@ -99,10 +99,24 @@ const userRoute = asyncHandler(async (req, res) => {
   });
 });
 
+const jwtDashboard = asyncHandler(async (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Dashboard access granted",
+    user: {
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+      role: req.user.role,
+    },
+  });
+});
+
 const checkAdminRole = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     isAdmin: req.user.role === "admin",
+    role: req.user.role,
   });
 });
 
@@ -111,8 +125,8 @@ module.exports = {
   generateToken,
   refreshToken,
   jwtProfile,
-    adminRoute,
-    userRoute,
-    checkAdminRole,
- 
-};
+  jwtDashboard,
+  adminRoute,
+  userRoute,
+  checkAdminRole,
+};

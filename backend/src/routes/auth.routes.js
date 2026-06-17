@@ -8,20 +8,40 @@ const {
   getProfile,
   updateProfile,
   logoutUser,
+  forgotPassword,
+  resetPassword,
+  sendOtp,
+  verifyOtp,
+  refreshToken,
 } = require("../controllers/auth.controller.js");
 
 const validateUser = require("../middleware/validateUser.middleware.js");
 
+const {
+  loginLimiter,
+  registerLimiter,
+} = require("../middleware/rateLimit.middleware.js");
+
 const { verifyJWT } = require("../middleware/auth.middleware");
 
-router.post("/register", validateUser, registerUser);
+router.post("/register", registerLimiter, validateUser, registerUser);
 
-router.post("/login", loginUser);
+router.post("/login", loginLimiter, loginUser);
 
 router.get("/profile", verifyJWT, getProfile);
 
 router.patch("/profile", verifyJWT, updateProfile);
 
 router.post("/logout", verifyJWT, logoutUser);
+
+router.post("/forgot-password", forgotPassword);
+
+router.post("/reset-password", resetPassword);
+
+router.post("/send-otp", sendOtp);
+
+router.post("/verify-otp", verifyOtp);
+
+router.post("/refresh-token", refreshToken);
 
 module.exports = router;
