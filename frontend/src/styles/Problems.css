@@ -1,0 +1,197 @@
+/* Problems Directory Page Styles */
+
+.problems-header {
+  margin-bottom: 32px;
+}
+
+.problems-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+/* Filters Bar Container */
+.filters-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--bg-card);
+  border: var(--border-glow);
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+  margin-bottom: 32px;
+}
+
+.filters-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.filter-input-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 360px;
+}
+
+.filter-input-wrapper input {
+  padding-left: 40px;
+}
+
+.filter-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.filter-select {
+  width: 180px;
+}
+
+.filters-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Problems Grid Layout */
+.problems-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.problem-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  cursor: pointer;
+}
+
+.problem-card-info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.problem-num {
+  font-family: var(--font-code);
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  min-width: 36px;
+}
+
+.problem-main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.problem-title-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.problem-card:hover .problem-title-text {
+  color: var(--color-secondary);
+}
+
+.problem-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.problem-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.problem-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.problem-stat svg {
+  font-size: 1rem;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.pagination-info {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  background: var(--bg-card);
+  border: var(--border-glow);
+  color: var(--text-primary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--bg-card-hover);
+  border-color: var(--color-primary);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filters-left {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-input-wrapper {
+    max-width: none;
+  }
+  
+  .filter-select {
+    width: 100%;
+  }
+  
+  .problem-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+  }
+  
+  .problem-card-info {
+    gap: 16px;
+  }
+}

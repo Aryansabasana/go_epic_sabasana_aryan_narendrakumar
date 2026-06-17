@@ -1,0 +1,192 @@
+/* Single Problem Detail Workspace Styles */
+
+.workspace {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  height: calc(100vh - 160px);
+  min-height: 500px;
+}
+
+@media (max-width: 992px) {
+  .workspace {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Left Pane Details card */
+.details-pane {
+  background: var(--bg-card);
+  border: var(--border-glow);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  overflow-y: auto;
+  box-shadow: var(--glass-shadow);
+}
+
+.problem-header {
+  margin-bottom: 24px;
+  border-bottom: var(--border-glow);
+  padding-bottom: 20px;
+}
+
+.problem-title {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+
+.instruction-text {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  background: rgba(16, 18, 27, 0.2);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid hsla(215, 15%, 70%, 0.02);
+}
+
+/* Right Pane Editor card */
+.editor-pane {
+  background: hsl(233, 24%, 6%);
+  border: var(--border-glow);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: hsl(233, 24%, 4%);
+  border-bottom: var(--border-glow);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.editor-filename {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Code Textarea container */
+.code-area-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+.code-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  resize: none;
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  padding: 24px;
+  outline: none;
+  tab-size: 4;
+}
+
+.code-textarea:focus {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+/* Terminal Console section */
+.terminal-console {
+  background: hsl(233, 24%, 3%);
+  border-top: var(--border-glow);
+  padding: 16px 24px;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.terminal-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.terminal-output {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  color: hsl(145, 80%, 45%);
+}
+
+.terminal-output.error {
+  color: hsl(343, 90%, 65%);
+}
+
+.solution-code-view {
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  background: hsl(233, 24%, 3%);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: var(--border-glow);
+  color: var(--text-primary);
+  overflow-x: auto;
+  white-space: pre;
+  margin-top: 16px;
+}
+
+/* Detail workspace Tabs */
+.workspace-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  border-bottom: var(--border-glow);
+  padding-bottom: 12px;
+}
+
+.workspace-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.workspace-tab:hover {
+  color: var(--text-primary);
+}
+
+.workspace-tab.active {
+  background: var(--color-primary-glow);
+  color: var(--color-primary);
+}
