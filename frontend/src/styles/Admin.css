@@ -1,0 +1,337 @@
+/* Admin Dashboard Styles */
+
+.admin-header {
+  margin-bottom: 32px;
+}
+
+.admin-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: var(--grad-admin);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--color-admin-glow);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: var(--radius-xl);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-admin);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+/* Admin Tabs (Telemetry / User Directory) */
+.admin-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  width: fit-content;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.admin-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.admin-tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-tab.active {
+  color: var(--color-admin);
+  background: var(--color-admin-glow);
+  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
+}
+
+/* Admin Stats Grid */
+.admin-stats-grid {
+  margin-bottom: 40px;
+}
+
+.admin-stat-card {
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--border-glow);
+  border-radius: var(--radius-lg);
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(245, 158, 11, 0.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 0 15px var(--color-admin-glow);
+}
+
+.admin-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--grad-admin);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.admin-stat-value {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.admin-stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.admin-stat-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 2rem;
+  opacity: 0.08;
+  color: var(--color-admin);
+}
+
+/* Difficulty Breakdown */
+.difficulty-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.difficulty-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.difficulty-bar-label {
+  width: 80px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--text-secondary);
+}
+
+.difficulty-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.difficulty-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.difficulty-bar-fill.easy { background: var(--color-easy); }
+.difficulty-bar-fill.medium { background: var(--color-medium); }
+.difficulty-bar-fill.advanced { background: var(--color-advanced); }
+
+.difficulty-bar-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  width: 40px;
+  text-align: right;
+}
+
+/* Admin Dashboard Layout */
+.admin-layout {
+  margin-bottom: 40px;
+}
+
+/* Recent Activity Tables */
+.recent-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.recent-table th {
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 700;
+  padding: 0 0 12px;
+  border-bottom: var(--border-glow);
+}
+
+.recent-table td {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.recent-table tr:last-child td {
+  border-bottom: none;
+}
+
+.recent-table td:first-child {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* JSON Import Section */
+.import-section {
+  margin-bottom: 40px;
+}
+
+.import-section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: var(--font-title);
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.import-section-desc {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  margin-bottom: 24px;
+}
+
+.dropzone {
+  border: 2px dashed rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-admin-glow);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.dropzone:hover, .dropzone.dragging {
+  border-color: var(--color-admin);
+  background: rgba(245, 158, 11, 0.15);
+  box-shadow: inset 0 0 15px rgba(245, 158, 11, 0.05);
+}
+
+.dropzone-icon {
+  font-size: 2.5rem;
+  color: var(--color-admin);
+  opacity: 0.8;
+}
+
+.dropzone-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.dropzone-text strong {
+  color: var(--color-admin);
+}
+
+.import-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.import-divider::before, .import-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.import-textarea {
+  min-height: 180px;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  resize: vertical;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  padding: 16px;
+  outline: none;
+  width: 100%;
+}
+
+.import-textarea:focus {
+  border-color: var(--color-admin);
+  box-shadow: 0 0 0 3px var(--color-admin-glow);
+}
+
+.import-result {
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  margin-top: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.import-result.success {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  color: var(--color-easy);
+}
+
+.import-result.error {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  color: var(--color-advanced);
+}
