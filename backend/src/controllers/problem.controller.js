@@ -59,7 +59,11 @@ const getAllProblems = asyncHandler(async (req, res) => {
 });
 
 const getSingleProblem = asynHandler(async (req, res) => {
-  const problem = await Problem.findById(req.params.problemId);
+  const problem = await Problem.findByIdAndUpdate(
+    req.params.problemId,
+    { $inc: { views: 1 } },
+    { new: true }
+  );
 
   if (!problem) {
     throw new ApiError(404, "Problem not found");
@@ -224,6 +228,75 @@ const getProblemsByInstructionKeyword = asyncHandler(async (req, res) => {
   });
 });
 
+const getRandomProblem = asyncHandler(async (req, res) => {
+  const count = await Problem.countDocuments();
+  if (count === 0) {
+    throw new ApiError(404, "No problems found");
+  }
+  const random = Math.floor(Math.random() * count);
+  const problem = await Problem.findOne().skip(random);
+  res.status(200).json({
+    success: true,
+    data: problem,
+  });
+});
+
+const getTrendingProblems = asyncHandler(async (req, res) => {
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.max(1, Number(req.query.limit) || 10);
+  const skip = (page - 1) * limit;
+
+  const problems = await Problem.find()
+    .sort("-views -createdAt")
+    .skip(skip)
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    page,
+    limit,
+    count: problems.length,
+    data: problems,
+  });
+});
+
+const getRecentProblems = asyncHandler(async (req, res) => {
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.max(1, Number(req.query.limit) || 10);
+  const skip = (page - 1) * limit;
+
+  const problems = await Problem.find()
+    .sort("-createdAt")
+    .skip(skip)
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    page,
+    limit,
+    count: problems.length,
+    data: problems,
+  });
+});
+
+const getAdvancedProblems = asyncHandler(async (req, res) => {
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.max(1, Number(req.query.limit) || 5);
+  const skip = (page - 1) * limit;
+
+  const problems = await Problem.find({ difficulty: "advanced" })
+    .skip(skip)
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    page,
+    limit,
+    count: problems.length,
+    data: problems,
+  });
+});
+
 module.exports = {
   getAllProblems,
   getSingleProblem,
@@ -232,9 +305,12 @@ module.exports = {
   updateProblem,
   deleteProblem,
   searchProblems,
-    getProblemsByTopic,
-    getProblemsByDifficulty,
-    getProblemsBySource,
-    getProblemsByInstructionKeyword,
-
+  getProblemsByTopic,
+  getProblemsByDifficulty,
+  getProblemsBySource,
+  getProblemsByInstructionKeyword,
+  getRandomProblem,
+  getTrendingProblems,
+  getRecentProblems,
+  getAdvancedProblems,
 };

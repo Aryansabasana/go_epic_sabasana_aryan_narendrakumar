@@ -14,6 +14,10 @@ const {
   getProblemsByDifficulty,
   getProblemsBySource,
   getProblemsByInstructionKeyword,
+  getRandomProblem,
+  getTrendingProblems,
+  getRecentProblems,
+  getAdvancedProblems,
 } = require("../controllers/problem.controller");
 
 const validateProblem = require("../middleware/validateProblem.middleware");
@@ -36,6 +40,14 @@ router.get("/difficulty/:difficulty", getProblemsByDifficulty);
 router.get("/source/:source", getProblemsBySource);
 
 router.get("/instruction/:keyword", getProblemsByInstructionKeyword);
+
+router.get("/random", getRandomProblem);
+
+router.get("/trending", getTrendingProblems);
+
+router.get("/recent", getRecentProblems);
+
+router.get("/advanced", getAdvancedProblems);
 
 router.get("/:problemId", getSingleProblem);
 

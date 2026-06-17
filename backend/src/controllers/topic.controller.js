@@ -79,9 +79,11 @@ const getTopicsByCategory = asyncHandler(async (req, res) => {
 });
 
 const getSingleTopic = asyncHandler(async (req, res) => {
-  const topic = await Topic.findOne({
-    name: req.params.topicName,
-  });
+  const topic = await Topic.findOneAndUpdate(
+    { name: req.params.topicName },
+    { $inc: { views: 1 } },
+    { new: true }
+  );
 
   if (!topic) {
     throw new ApiError(404, "Topic not found");
@@ -199,6 +201,44 @@ const searchTopics = asyncHandler(async (req, res) => {
   });
 });
 
+const getPopularTopics = asyncHandler(async (req, res) => {
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.max(1, Number(req.query.limit) || 10);
+  const skip = (page - 1) * limit;
+
+  const topics = await Topic.find()
+    .sort("-views -createdAt")
+    .skip(skip)
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    page,
+    limit,
+    count: topics.length,
+    data: topics,
+  });
+});
+
+const getTrendingTopics = asyncHandler(async (req, res) => {
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.max(1, Number(req.query.limit) || 10);
+  const skip = (page - 1) * limit;
+
+  const topics = await Topic.find()
+    .sort("-views -createdAt")
+    .skip(skip)
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    page,
+    limit,
+    count: topics.length,
+    data: topics,
+  });
+});
+
 module.exports = {
   getAllTopics,
   getSingleTopic,
@@ -209,4 +249,6 @@ module.exports = {
   getTopicByName,
   getTopicsByCategory,
   searchTopics,
+  getPopularTopics,
+  getTrendingTopics,
 };

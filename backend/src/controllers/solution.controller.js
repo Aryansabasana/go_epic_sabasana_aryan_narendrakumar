@@ -137,7 +137,11 @@ const getRecentSolutions = asyncHandler(async (req, res) => {
 });
 
 const getSingleSolution = asyncHandler(async (req, res) => {
-  const solution = await Solution.findById(req.params.solutionId);
+  const solution = await Solution.findByIdAndUpdate(
+    req.params.solutionId,
+    { $inc: { views: 1 } },
+    { new: true }
+  );
 
   if (!solution) {
     throw new ApiError(404, "Solution not found");
@@ -213,6 +217,38 @@ const deleteSolution = asyncHandler(async (req, res) => {
   });
 });
 
+const getRandomSolution = asyncHandler(async (req, res) => {
+  const count = await Solution.countDocuments();
+  if (count === 0) {
+    throw new ApiError(404, "No solutions found");
+  }
+  const random = Math.floor(Math.random() * count);
+  const solution = await Solution.findOne().skip(random);
+  res.status(200).json({
+    success: true,
+    data: solution,
+  });
+});
+
+const getTrendingSolutions = asyncHandler(async (req, res) => {
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const limit = Math.max(1, Number(req.query.limit) || 10);
+  const skip = (page - 1) * limit;
+
+  const solutions = await Solution.find()
+    .sort("-views -createdAt")
+    .skip(skip)
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    page,
+    limit,
+    count: solutions.length,
+    data: solutions,
+  });
+});
+
 module.exports = {
   getAllSolutions,
   getSingleSolution,
@@ -225,4 +261,6 @@ module.exports = {
   getSolutionsBySource,
   searchSolutions,
   getRecentSolutions,
+  getRandomSolution,
+  getTrendingSolutions,
 };
