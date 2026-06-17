@@ -16,12 +16,18 @@ const {
   getProblemsByInstructionKeyword,
 } = require("../controllers/problem.controller");
 
-const validateProblem = require("../middleware/validateProblem.middleware")
+const validateProblem = require("../middleware/validateProblem.middleware");
 
+const {
+  generalLimiter,
+  searchLimiter,
+  createProblemLimiter,
+  bulkUploadLimiter,
+} = require("../middleware/rateLimit.middleware");
 
-router.get("/", getAllProblems);
+router.get("/", generalLimiter, getAllProblems);
 
-router.get("/search", searchProblems);
+router.get("/search", searchLimiter, searchProblems);
 
 router.get("/topic/:topic", getProblemsByTopic);
 
@@ -33,14 +39,12 @@ router.get("/instruction/:keyword", getProblemsByInstructionKeyword);
 
 router.get("/:problemId", getSingleProblem);
 
-router.post("/", validateProblem, createProblem);
+router.post("/", createProblemLimiter, validateProblem, createProblem);
 
 router.put("/:problemId", validateProblem, replaceProblem);
 
 router.patch("/:problemId", updateProblem);
 
 router.delete("/:problemId", deleteProblem);
-
-
 
 module.exports = router;

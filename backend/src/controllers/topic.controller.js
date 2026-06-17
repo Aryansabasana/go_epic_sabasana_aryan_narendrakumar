@@ -1,5 +1,6 @@
 const Topic = require("../models/topic.model");
 const asyncHandler = require("../utils/asyncHandler");
+const ApiError = require("../utils/apiError");
 
 const getAllTopics = asyncHandler(async (req, res) => {
   const filter = {};

@@ -4,6 +4,7 @@ const router = express.Router();
 
 const Dataset = require("../models/dataset.model");
 const { getAllDatasets, getSingleDataset, createDataset, replaceDataset, updateDataset, deleteDataset, searchDatasets ,getLatestDatasets,   getDatasetsBySource, getDatasetsByTopic, getDatasetsByDifficulty  } = require("../controllers/dataset.controller");
+const { deleteLimiter } = require("../middleware/rateLimit.middleware");
 
 
 
@@ -38,6 +39,6 @@ router.patch("/:datasetId", updateDataset);
 
 
 // DELETE DATASET
-router.delete("/:datasetId", deleteDataset);
+router.delete("/:datasetId", deleteLimiter, deleteDataset);
 
 module.exports = router;
